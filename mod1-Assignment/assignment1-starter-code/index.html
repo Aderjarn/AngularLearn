@@ -1,7 +1,8 @@
 <!doctype html>
-<html lang="en">
+<html ng-app='LunchCheck'>
   <head>
     <meta charset="utf-8">
+    <script src="angular.min.js"></script>
     <script src="app.js"></script>
     <title>Lunch Checker</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,20 +11,21 @@
       .message { font-size: 1.3em; font-weight: bold; }
     </style>
   </head>
-<body ng-app="MyApp">
-  <div ng-controller="Controller as ctrl">
+<body>
+  <div ng-controller='LunchCheckController'>
    <div class="container">
      <h1>Lunch Checker</h1>
 
          <div class="form-group">
-             <input id="lunch-menu" type="text"
+             <input id="lunch-menu" type="text " ng-model="lunchMenu"
              placeholder="list comma separated dishes you usually have for lunch"
              class="form-control">
          </div>
          <div class="form-group">
-             <button class="btn btn-default">Check If Too Much</button>
+             <button ng-click="checkLunch()">Check If Too Much</button>
          </div>
-         <div class="form-group message">
+         <div class="form-group message" ng-show="enjoyMessage || errorMessage">
+          {{enjoyMessage || errorMessage}}
            <!-- Your message can go here. -->
          </div>
    </div>
