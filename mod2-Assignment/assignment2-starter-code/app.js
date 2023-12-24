@@ -26,11 +26,11 @@
         var service = this;
 
         var toBuyList = [
-            { name: 'Cookies', quantity: 10 },
-            { name: 'Milk', quantity: 2 },
-            { name: 'Bread', quantity: 1 },
-            { name: 'Eggs', quantity: 12 },
-            { name: 'Bananas', quantity: 6 }
+            { name: ' Cookies', quantity: 10 },
+            { name: ' Milk', quantity: 2 },
+            { name: ' Bread', quantity: 1 },
+            { name: ' Eggs', quantity: 12 },
+            { name: ' Bananas', quantity: 6 }
         ];
 
         var alreadyBoughtList = [];
