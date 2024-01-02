@@ -1,5 +1,8 @@
+<!-- Update foundItems.html -->
 <div>
-    <p ng-if="found.length === 0">Nothing found</p>
+    <!-- Display "Nothing found" only if the button has been pressed -->
+    <p ng-if="buttonPressed && (!found || found.length === 0)">Nothing found</p>
+    
     <ul>
         <li ng-repeat="item in found">
             {{ item.name }}, {{ item.short_name }}, {{ item.description }}
