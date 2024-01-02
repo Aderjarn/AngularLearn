@@ -64,7 +64,7 @@ service.getMatchedMenuItems = function (searchTerm) {
         if (result.data && result.data.A && result.data.A.menu_items) {
             var menuItems = result.data.A.menu_items;
 
-            console.log('menuItems:', menuItems);
+            //console.log('menuItems:', menuItems);
 
             if (Array.isArray(menuItems) && menuItems.length) {
                 var foundItems = [];
