@@ -1,5 +1,3 @@
-// app.js
-
 (function () {
     'use strict';
 
@@ -8,50 +6,67 @@
         .service('MenuSearchService', MenuSearchService)
         .directive('foundItems', FoundItemsDirective);
 
-    // Update the NarrowItDownController
-NarrowItDownController.$inject = ['MenuSearchService'];
-function NarrowItDownController(MenuSearchService) {
-    var narrowCtrl = this;
+    function FoundItemsDirective() {
+        var ddo = {
+            templateUrl: 'foundItems.html',
+            scope: {
+                found: '<',
+                onRemove: '&'
+            },
+        };
+    
+        return ddo;
+    }
 
-    narrowCtrl.searchTerm = '';
-    narrowCtrl.found = [];
-    narrowCtrl.buttonPressed = false; // Flag to track button press
+    NarrowItDownController.$inject = ['MenuSearchService'];
+    function NarrowItDownController(MenuSearchService) {
+        var narrowCtrl = this;
 
-    narrowCtrl.narrowItDown = function () {
-        narrowCtrl.buttonPressed = true; // Set the flag when the button is pressed
+        narrowCtrl.searchTerm = '';
+        narrowCtrl.found = [];
+        narrowCtrl.buttonPressed = false; // Flag to track button press
 
-        if (narrowCtrl.searchTerm.trim() === '') {
-            narrowCtrl.found = [];
-            return;
-        }
+        narrowCtrl.narrowItDown = function () {
+            narrowCtrl.buttonPressed = true; // Set the flag when the button is pressed
 
-        MenuSearchService.getMatchedMenuItems(narrowCtrl.searchTerm)
-            .then(function (foundItems) {
-                narrowCtrl.found = foundItems;
-            });
-    };
+            if (narrowCtrl.searchTerm.trim() === '') {
+                narrowCtrl.found = [];
+                console.log('Empty search term');
+                return;
+            }
 
-    narrowCtrl.removeItem = function (index) {
-        narrowCtrl.found.splice(index, 1);
-    };
-}
+            MenuSearchService.getMatchedMenuItems(narrowCtrl.searchTerm)
+                .then(function (foundItems) {
+                    narrowCtrl.found = foundItems;
+                    console.log('Found Items:', narrowCtrl.found);
+                });
+        };
 
+        narrowCtrl.removeItem = function (index) {
+            narrowCtrl.found.splice(index, 1);
+            console.log('Item removed. Updated found array:', narrowCtrl.found);
+        };
+    }
 
     MenuSearchService.$inject = ['$http'];
 function MenuSearchService($http) {
     var service = this;
 
-    // Step 10: Service method to get matched menu items
-    service.getMatchedMenuItems = function (searchTerm) {
-        return $http({
-            method: 'GET',
-            url: 'https://coursera-jhu-default-rtdb.firebaseio.com/menu_items.json'
-        }).then(function (result) {
-            // Ensure that result.data.menu_items is defined
-            var menuItems = result.data.menu_items || [];
+    // Update the getMatchedMenuItems method
+service.getMatchedMenuItems = function (searchTerm) {
+    return $http({
+        method: 'GET',
+        url: 'https://coursera-jhu-default-rtdb.firebaseio.com/menu_items.json'
+    }).then(function (result) {
+        console.log('API Response:', result.data);
 
-            // Check if menuItems has a length property
-            if (menuItems.length) {
+        // Ensure result.data is an object with the expected structure
+        if (result.data && result.data.A && result.data.A.menu_items) {
+            var menuItems = result.data.A.menu_items;
+
+            console.log('menuItems:', menuItems);
+
+            if (Array.isArray(menuItems) && menuItems.length) {
                 var foundItems = [];
 
                 // Step 11: Filter menu items based on the search term
@@ -61,28 +76,21 @@ function MenuSearchService($http) {
                     }
                 }
 
+                console.log('foundItems:', foundItems); // Add this line
+
                 return foundItems;
             } else {
-                // Return an empty array or handle it based on your requirements
+                console.log('No menu items found.');
                 return [];
             }
-        }).catch(function (error) {
-            console.error('Error fetching menu items:', error);
-            throw error; // Rethrow the error for further handling if needed
-        });
-    };
+        } else {
+            console.log('Unexpected API response structure:', result.data);
+            return [];
+        }
+    }).catch(function (error) {
+        console.error('Error fetching menu items:', error);
+        throw error;
+    });
+};
 }
-
-    function FoundItemsDirective() {
-        var ddo = {
-            templateUrl: 'foundItems.html',
-            scope: {
-                found: '<',
-                onRemove: '&'
-            }
-        };
-
-        return ddo;
-    }
-
 })();
