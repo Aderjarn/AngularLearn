@@ -1,9 +1,6 @@
 <h3>Items</h3>
 <ul>
-  <div ng-repeat="item in itemsCtrl.items">
-    <h3>{{ item.name }}</h3>
-    <p>{{ item.description }}</p>
-    <p>Price: ${{ item.price_large }}</p>
-    <hr>
-  </div>  
+  <li ng-repeat="item in itemsCtrl.items">
+    {{ item.name }} - {{ item.description }} - Price: {{ item.price_large }}
+  </li>
 </ul>

@@ -9,19 +9,14 @@
         items: '<'
       }
     })
-    .config(['$controllerProvider', function ($controllerProvider) {
-      $controllerProvider.register('ItemsController', ItemsController);
-    }]);
 
-  function ItemsController() {
-    // ItemsController logic goes here
-    console.log('itemsCtrl.items : ', this)
+  angular.module('MenuApp')
+    .controller('ItemsController', ItemsController);
+
+  ItemsController.$inject = ['items']; // Ensure 'items' is injected correctly
+  function ItemsController(items) {
     var itemsCtrl = this;
-    console.log('Hi')
-    itemsCtrl.$onChanges = function (changes) {
-      if (changes.items) {
-        itemsCtrl.items = changes.items.currentValue || [];
-      }
-    };
+    itemsCtrl.items = items;
+    console.log('ItemsController.items:', itemsCtrl.items);
   }
 })();

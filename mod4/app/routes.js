@@ -22,7 +22,7 @@
             return MenuDataService.getAllCategories();
           }]
         }
-      })      
+      })
       .state('items', {
         url: '/items/{categoryShortName}',
         templateUrl: 'app/items/items.template.html',
@@ -32,19 +32,19 @@
             return MenuDataService.getItemsForCategory($stateParams.categoryShortName)
               .then(function (response) {
                 console.log('Full response in routes.js:', response);
-        
+      
                 if (Array.isArray(response) && response.length > 0) {
                   console.log('Data in routes.js:', response);
                   console.log('Menu Items in routes.js:', response);
-                  return { menuItems: response };
+                  return response;  // Return the raw array without wrapping it in an object
                 } else {
                   console.error('Error: Invalid response data structure');
-                  return { menuItems: [] };
+                  return [];  // Return an empty array
                 }
               })
               .catch(function (error) {
                 console.error('Error fetching items:', error);
-                return { menuItems: [] };
+                return [];  // Return an empty array
               });
           }]
         }        
