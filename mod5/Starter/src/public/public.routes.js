@@ -43,25 +43,15 @@ function routeConfig ($stateProvider) {
     })
     .state('public.signup', {
       url: '/signup',
-      templateUrl: 'src/public/signup/signup.html',
+      templateUrl: 'src/public/signup/signUp.html',
       controller: 'SignUpController',
       controllerAs: 'signUpCtrl',
-      resolve: {
-        menuCategories: ['MenuService', function (MenuService) {
-          return MenuService.getCategories();
-        }]
-      }
     })
     .state('public.myinfo', {
       url: '/myinfo',
-      templateUrl: 'src/public/myinfo/myinfo.html',
-      controller: 'MyInfoController',
-      controllerAs: 'myInfoCtrl',
-      resolve: {
-        menuCategories: ['MenuService', function (MenuService) {
-          return MenuService.getCategories();
-        }]
-      }
+      templateUrl: 'src/public/myinfo/myInfo.html',
+      controller: 'InfoController',
+      controllerAs: 'infoCtrl',
     });
 }
 })();

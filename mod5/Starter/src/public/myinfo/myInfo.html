@@ -1,0 +1,31 @@
+<div class="container">
+    <div class="row" ng-show="infoCtrl.myInfo.registered">
+      <div class="col-md-12">
+        <div class="h2">
+          User Name: {{ infoCtrl.myInfo.firstName }} {{
+            infoCtrl.myInfo.lastName }}
+        </div>
+        <div class="h2">Email: {{ infoCtrl.myInfo.email }}</div>
+        <div class="h2">Contact Number: {{ infoCtrl.myInfo.phone }}</div>
+      </div>
+      <div class="col-md-12">
+        <div class="row">Your favorite dish:</div>
+        <div class="row">
+          <menu-item
+            menu-item="infoCtrl.myInfo.favoriteDishObj"
+            category-short-name="infoCtrl.categoryName"
+          >
+          </menu-item>
+        </div>
+      </div>
+    </div>
+    <div class="text-center" ng-if="!infoCtrl.myInfo.registered">
+      <h1 class="text-center">You are not registered</h1>
+      <a
+        ui-sref="public.signup"
+        class="text-warning"
+        style="text-decoration: underline"
+        >Sign up first in order to use this service</a
+      >
+    </div>
+  </div>

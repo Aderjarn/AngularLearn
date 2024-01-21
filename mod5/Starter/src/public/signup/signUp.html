@@ -1,0 +1,137 @@
+<div class="container">
+    <div
+      class="row justify-content-center align-items-center g-2"
+      ng-hide="signUpCtrl.savedmyInfo.registered"
+    >
+      <form
+        name="ngForm"
+        class="col-md-8 col-md-offset-2"
+        ng-submit="signUpCtrl.submitForm()"
+        novalidate
+      >
+        <div class="col-md-6">
+          <label class="form-label">First Name</label>
+          <input
+            type="text"
+            class="form-control"
+            name="firstName"
+            ng-model="signUpCtrl.myInfo.firstName"
+            required
+            minlength="3"
+            ng-maxlength="24"
+          />
+          <div ng-if="ngForm.firstName.$touched && ngForm.firstName.$invalid">
+            <small class="form-text" ng-if="ngForm.firstName.$error.required"
+              >Input is required.</small
+            >
+            <small class="form-text" ng-if="ngForm.firstName.$error.minlength"
+              >Input is too short.</small
+            >
+            <small class="form-text" ng-if="ngForm.firstName.$error.maxlength"
+              >Input is too long.</small
+            >
+          </div>
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Last Name</label>
+          <input
+            type="text"
+            class="form-control"
+            name="lastName"
+            ng-model="signUpCtrl.myInfo.lastName"
+            id=""
+            aria-describedby="emailHelpId"
+            required
+            minlength="3"
+            ng-maxlength="12"
+          />
+          <div ng-if="ngForm.lastName.$touched && ngForm.lastName.$invalid">
+            <small class="form-text" ng-if="ngForm.lastName.$error.required"
+              >Input is required.</small
+            >
+            <small class="form-text" ng-if="ngForm.lastName.$error.minlength"
+              >Input is too short.</small
+            >
+            <small class="form-text" ng-if="ngForm.lastName.$error.maxlength"
+              >Input is too long.</small
+            >
+          </div>
+        </div>
+        <div class="col-md-12">
+          <label class="form-label">Email</label>
+          <input
+            type="email"
+            class="form-control"
+            name="email"
+            ng-model="signUpCtrl.myInfo.email"
+            id=""
+            aria-describedby="emailHelpId"
+            required
+          />
+          <div ng-if="ngForm.email.$touched && ngForm.email.$invalid">
+            <small class="form-text"
+              >email must be in (someone@something) format.</small
+            >
+          </div>
+        </div>
+        <div class="col-md-12">
+          <label class="form-label">Phone Number</label>
+          <input
+            type="text"
+            class="form-control"
+            name="phone"
+            ng-model="signUpCtrl.myInfo.phone"
+            required
+            ng-pattern="/^\d{3}-\d{3}-\d{4}$/"
+            aria-describedby="emailHelpId"
+          />
+          <div ng-if="ngForm.phone.$touched && ngForm.phone.$invalid">
+            <small ng-if="ngForm.phone.$error.required"
+              >Phone number is required.</small
+            >
+            <small ng-if="ngForm.phone.$error.pattern"
+              >phone number must be in (###-###-####) format.</small
+            >
+          </div>
+        </div>
+        <div class="col-md-12">
+          <label>Enter your favorite Dish Menu Number</label>
+          <input
+            type="text"
+            class="form-control"
+            name="favoriteDish"
+            ng-model="signUpCtrl.myInfo.favoriteDish"
+            required
+            placeholder="L1, L2, ..."
+          />
+          <div ng-if="ngForm.phone.$touched && ngForm.favoriteDish.$invalid">
+            <small ng-if="ngForm.favoriteDish.$error.required"
+              >You must specify your favorite dish Menu Number.</small
+            >
+          </div>
+        </div>
+        <div ng-if="signUpCtrl.errorMsg" class="col-md-12">
+          <strong>{{ signUpCtrl.errorMsg }}</strong>
+        </div>
+        <div class="col-md-offset-5 col-md-5" style="margin-top: 2rem">
+          <button
+            type="submit"
+            class="btn btn-warning"
+            ng-disabled="ngForm.$invalid"
+            style="padding: 10px 40px"
+          >
+            Save
+          </button>
+        </div>
+      </form>
+    </div>
+    <div class="text-center" ng-if="signUpCtrl.savedmyInfo.registered">
+      <h1 class="text-center">You are already registered</h1>
+      <a
+        ui-sref="public.myInfo"
+        class="text-warning"
+        style="text-decoration: underline"
+        >View your info</a
+      >
+    </div>
+  </div>
