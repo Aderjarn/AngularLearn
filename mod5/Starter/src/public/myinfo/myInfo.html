@@ -1,6 +1,6 @@
 <div class="container">
-    <div class="row" ng-show="infoCtrl.myInfo.registered">
-      <div class="col-md-12">
+    <div class="row text-center" ng-show="infoCtrl.myInfo.registered">
+      <div class="col-md-12 text-center">
         <div class="h2">
           User Name: {{ infoCtrl.myInfo.firstName }} {{
             infoCtrl.myInfo.lastName }}
@@ -8,9 +8,9 @@
         <div class="h2">Email: {{ infoCtrl.myInfo.email }}</div>
         <div class="h2">Contact Number: {{ infoCtrl.myInfo.phone }}</div>
       </div>
-      <div class="col-md-12">
-        <div class="row">Your favorite dish:</div>
-        <div class="row">
+      <div class="col-md-12 text-center">
+        <div class="row text-center">Your favorite dish:</div>
+        <div class="row justify-content-center">
           <menu-item
             menu-item="infoCtrl.myInfo.favoriteDishObj"
             category-short-name="infoCtrl.categoryName"
