@@ -31,7 +31,7 @@
             signUpCtrl.errorMsg = "No such menu number exists";
           })
           .catch((err) => {
-            signUpCtrl.errorMsg = "Unexpected Error while fetching your favorite Dish";
+            signUpCtrl.errorMsg = "Unable to fetch your favorite Dish";
             console.log(err, "err");
           });
         InfoService.saveUserData(signUpCtrl.myInfo);
